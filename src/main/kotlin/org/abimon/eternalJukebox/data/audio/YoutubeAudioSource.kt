@@ -321,7 +321,7 @@ object YoutubeAudioSource : IAudioSource {
     }
 
     init {
-        apiKey = ((((EternalJukebox.config.audioSourceOptions["API_KEY"]) as? String)?.split(",")
+        apiKey = ((((EternalJukebox.config.audioSourceOptions["API_KEY"]) as? String)?.split(",").toTypedArray()
             ?: EternalJukebox.config.audioSourceOptions["apiKey"]) as? Array<String>?)
         format = (EternalJukebox.config.audioSourceOptions["AUDIO_FORMAT"]
             ?: EternalJukebox.config.audioSourceOptions["audioFormat"]) as? String ?: "m4a"
