@@ -19,10 +19,9 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.math.abs
 import kotlin.math.sin
-import kotlin.random.random
 
 object YoutubeAudioSource : IAudioSource {
-    val apiKey: List<*>
+    val apiKey: List<String>
     val uuid: String
         get() = UUID.randomUUID().toString()
     val format: String
@@ -319,8 +318,8 @@ object YoutubeAudioSource : IAudioSource {
     }
 
     init {
-        apiKey = (EternalJukebox.config.audioSourceOptions["API_KEY"]
-            ?: listOf(EternalJukebox.config.audioSourceOptions["apiKey"])) as? List<*>
+        apiKey = (listOf(EternalJukebox.config.audioSourceOptions["API_KEY"])
+            ?: EternalJukebox.config.audioSourceOptions["apiKey"]) as? List<String>
         format = (EternalJukebox.config.audioSourceOptions["AUDIO_FORMAT"]
             ?: EternalJukebox.config.audioSourceOptions["audioFormat"]) as? String ?: "m4a"
         command = ((EternalJukebox.config.audioSourceOptions["AUDIO_COMMAND"]
