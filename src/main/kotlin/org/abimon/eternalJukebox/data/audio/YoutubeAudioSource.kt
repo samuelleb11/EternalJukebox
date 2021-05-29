@@ -21,7 +21,7 @@ import kotlin.math.abs
 import kotlin.math.sin
 
 object YoutubeAudioSource : IAudioSource {
-    val apiKey: List<String>
+    val apiKey: List<String>?
     val uuid: String
         get() = UUID.randomUUID().toString()
     val format: String
@@ -235,7 +235,7 @@ object YoutubeAudioSource : IAudioSource {
 
         val (_, _, r) = Fuel.get(
                 "https://www.googleapis.com/youtube/v3/videos", listOf(
-                    "part" to "contentDetails,snippet", "id" to id, "key" to (apiKey.random()
+                    "part" to "contentDetails,snippet", "id" to id, "key" to (apiKey?.random()
                         ?: return null)
                 )
             )
@@ -266,7 +266,7 @@ object YoutubeAudioSource : IAudioSource {
 
         val (_, _, r) = Fuel.get(
                 "https://www.googleapis.com/youtube/v3/videos", listOf(
-                    "part" to "contentDetails,snippet", "id" to ids.joinToString(), "key" to (apiKey.random()
+                    "part" to "contentDetails,snippet", "id" to ids.joinToString(), "key" to (apiKey?.random()
                         ?: return emptyList())
                 )
             )
@@ -297,7 +297,7 @@ object YoutubeAudioSource : IAudioSource {
 
         val (_, _, r) = Fuel.get(
                 "https://www.googleapis.com/youtube/v3/search", listOf(
-                    "part" to "snippet", "q" to query, "maxResults" to "$maxResults", "key" to (apiKey.random()
+                    "part" to "snippet", "q" to query, "maxResults" to "$maxResults", "key" to (apiKey?.random()
                         ?: return emptyList()), "type" to "video"
                 )
             )
@@ -319,7 +319,7 @@ object YoutubeAudioSource : IAudioSource {
 
     init {
         apiKey = ((listOf(EternalJukebox.config.audioSourceOptions["API_KEY"])
-            ?: EternalJukebox.config.audioSourceOptions["apiKey"]) as? List<String>)
+            ?: EternalJukebox.config.audioSourceOptions["apiKey"]) as? List<String>?)
         format = (EternalJukebox.config.audioSourceOptions["AUDIO_FORMAT"]
             ?: EternalJukebox.config.audioSourceOptions["audioFormat"]) as? String ?: "m4a"
         command = ((EternalJukebox.config.audioSourceOptions["AUDIO_COMMAND"]
