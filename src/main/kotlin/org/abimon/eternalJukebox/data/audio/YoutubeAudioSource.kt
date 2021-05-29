@@ -21,7 +21,7 @@ import kotlin.math.abs
 import kotlin.math.sin
 
 object YoutubeAudioSource : IAudioSource {
-    val apiKey: List<String>?
+    val apiKey: List<String>
     val uuid: String
         get() = UUID.randomUUID().toString()
     val format: String
@@ -318,8 +318,8 @@ object YoutubeAudioSource : IAudioSource {
     }
 
     init {
-        apiKey = (listOf(EternalJukebox.config.audioSourceOptions["API_KEY"])
-            ?: EternalJukebox.config.audioSourceOptions["apiKey"]) as? List<String>
+        apiKey = ((listOf(EternalJukebox.config.audioSourceOptions["API_KEY"])
+            ?: EternalJukebox.config.audioSourceOptions["apiKey"]) as? List<String>)
         format = (EternalJukebox.config.audioSourceOptions["AUDIO_FORMAT"]
             ?: EternalJukebox.config.audioSourceOptions["audioFormat"]) as? String ?: "m4a"
         command = ((EternalJukebox.config.audioSourceOptions["AUDIO_COMMAND"]
