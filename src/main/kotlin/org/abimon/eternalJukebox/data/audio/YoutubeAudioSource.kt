@@ -20,7 +20,6 @@ import java.util.concurrent.atomic.AtomicLong
 import kotlin.math.abs
 import kotlin.math.sin
 import kotlin.random.random
-import java.util.Random
 
 object YoutubeAudioSource : IAudioSource {
     val apiKey: List<*>
@@ -237,7 +236,7 @@ object YoutubeAudioSource : IAudioSource {
 
         val (_, _, r) = Fuel.get(
                 "https://www.googleapis.com/youtube/v3/videos", listOf(
-                    "part" to "contentDetails,snippet", "id" to id, "key" to (apiKey.Random()
+                    "part" to "contentDetails,snippet", "id" to id, "key" to (apiKey.random()
                         ?: return null)
                 )
             )
@@ -268,7 +267,7 @@ object YoutubeAudioSource : IAudioSource {
 
         val (_, _, r) = Fuel.get(
                 "https://www.googleapis.com/youtube/v3/videos", listOf(
-                    "part" to "contentDetails,snippet", "id" to ids.joinToString(), "key" to (apiKey.Random()
+                    "part" to "contentDetails,snippet", "id" to ids.joinToString(), "key" to (apiKey.random()
                         ?: return emptyList())
                 )
             )
@@ -299,7 +298,7 @@ object YoutubeAudioSource : IAudioSource {
 
         val (_, _, r) = Fuel.get(
                 "https://www.googleapis.com/youtube/v3/search", listOf(
-                    "part" to "snippet", "q" to query, "maxResults" to "$maxResults", "key" to (apiKey.Random()
+                    "part" to "snippet", "q" to query, "maxResults" to "$maxResults", "key" to (apiKey.random()
                         ?: return emptyList()), "type" to "video"
                 )
             )
