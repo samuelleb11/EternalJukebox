@@ -226,6 +226,7 @@ object YoutubeAudioSource : IAudioSource {
 
     fun getContentDetailsWithKey(id: String): YoutubeContentItem? {
         val lastQuota = hitQuota.get()
+        println(apiKey?.random())
 
         if (lastQuota != -1L) {
             if ((Instant.now().toEpochMilli() - lastQuota) < QUOTA_TIMEOUT)
@@ -257,6 +258,7 @@ object YoutubeAudioSource : IAudioSource {
 
     fun getMultiContentDetailsWithKey(ids: List<String>): List<YoutubeContentItem> {
         val lastQuota = hitQuota.get()
+        println(apiKey?.random())
 
         if (lastQuota != -1L) {
             if ((Instant.now().toEpochMilli() - lastQuota) < QUOTA_TIMEOUT)
@@ -288,6 +290,7 @@ object YoutubeAudioSource : IAudioSource {
 
     fun searchYoutubeWithKey(query: String, maxResults: Int = 5): List<YoutubeSearchItem> {
         val lastQuota = hitQuota.get()
+        println(apiKey?.random())
 
         if (lastQuota != -1L) {
             if ((Instant.now().toEpochMilli() - lastQuota) < QUOTA_TIMEOUT)
@@ -334,5 +337,6 @@ object YoutubeAudioSource : IAudioSource {
             logger.warn(
                 "Warning: No API key provided. We're going to scrape the Youtube search page which is a not great thing to do.\nTo obtain an API key, follow the guide here (https://developers.google.com/youtube/v3/getting-started) or over on the EternalJukebox Github page!"
             )
+        println(apiKey?)
     }
 }
