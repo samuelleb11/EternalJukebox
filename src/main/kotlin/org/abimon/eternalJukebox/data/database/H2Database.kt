@@ -24,8 +24,8 @@ object H2Database : HikariDatabase() {
             update.clearParameters()
 
             chunk.forEach { (key, amount) ->
-                select.setString(1, key.substringBefore(':'))
-                select.setString(2, key.substringAfter(':'))
+                select.setString(2, key.substringBefore(':'))
+                select.setString(1, key.substringAfter(':'))
                 select.execute()
 
                 select.resultSet.use { rs ->
@@ -34,8 +34,8 @@ object H2Database : HikariDatabase() {
                         update.setLong(2, rs.getLong("id"))
                         update.addBatch()
                     } else {
-                        insert.setString(1, key.substringAfter(':'))
-                        insert.setString(2, key.substringBefore(':'))
+                        insert.setString(2, key.substringAfter(':'))
+                        insert.setString(1, key.substringBefore(':'))
                         insert.setInt(3, amount)
                         insert.addBatch()
                     }
