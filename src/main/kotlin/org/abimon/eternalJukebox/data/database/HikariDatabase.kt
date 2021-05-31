@@ -519,6 +519,7 @@ abstract class HikariDatabase : IDatabase {
             while (isActive) {
                 println("[Condensing Popular Updates]")
                 val updates: MutableMap<String, Int> = HashMap()
+                println(updates)
 
                 withTimeoutOrNull(5_000) {
                     popularUpdates.forEach { (service, channel) ->
@@ -535,13 +536,16 @@ abstract class HikariDatabase : IDatabase {
 
                         val select =
                             connection.prepareStatement("SELECT song_id, hits FROM popular WHERE service=? ORDER BY hits DESC LIMIT 1000;")
+                        println(select)
 
                         popularSongs.keys.forEach { service ->
                             select.setString(1, service)
                             select.execute()
+                            println(service)
 
                             val results = select.resultSet
                             val popular: MutableList<String> = ArrayList()
+                            println(popular)
 
                             while (results.next()) {
                                 popular.add(results.getString("song_id"))
