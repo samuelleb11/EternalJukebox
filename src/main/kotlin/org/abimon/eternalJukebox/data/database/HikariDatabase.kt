@@ -201,7 +201,7 @@ abstract class HikariDatabase : IDatabase {
         return popularLocks[service]?.read {
             popularSongs[service]?.take(count)
         }?.mapNotNull { songID ->
-            getInfo(songID, clientInfo)
+            getInfo(songID)
         } ?: emptyList()
     }
 
