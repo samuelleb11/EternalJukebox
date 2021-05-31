@@ -427,7 +427,7 @@ app: jukebox
     }
 
     function listPopularTracks() {
-        $.getJSON('/api/site/popular/jukebox', {count: 12}, function (data) {
+        $.getJSON('/api/site/popular/jukebox', {count: 50}, function (data) {
             listTracks('#popular-list', data);
             ga_track('list', 'popular-tracks', '');
         });
