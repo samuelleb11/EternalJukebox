@@ -520,7 +520,7 @@ abstract class HikariDatabase : IDatabase {
                 println("[Condensing Popular Updates]")
                 val updates: MutableMap<String, Int> = HashMap()
 
-                withTimeoutOrNull(5_000) {
+                withTimeoutOrNull(500) {
                     popularUpdates.forEach { (service, channel) ->
                         while (!channel.isEmpty)
                             updates.compute("$service:${channel.receive()}") { _, v -> v?.plus(1) ?: 1 }
