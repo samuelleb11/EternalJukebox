@@ -537,7 +537,7 @@ abstract class HikariDatabase : IDatabase {
                             connection.prepareStatement("SELECT song_id, hits FROM popular WHERE service=? ORDER BY hits DESC LIMIT 1000;")
 
                         popularSongs.keys.forEach { service ->
-                            select.setString(2, service)
+                            select.setString(1, service)
                             select.execute()
 
                             val results = select.resultSet
