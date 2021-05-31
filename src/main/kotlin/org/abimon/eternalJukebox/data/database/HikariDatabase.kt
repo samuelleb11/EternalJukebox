@@ -182,27 +182,27 @@ abstract class HikariDatabase : IDatabase {
     }
 
     override suspend fun providePopularSongs(service: String, count: Int, clientInfo: ClientInfo?): List<JukeboxInfo> {
-        use { connection ->
-            val select =
-                connection.prepareStatement("SELECT song_id, hits FROM popular WHERE service=? ORDER BY hits DESC LIMIT $count;")
-            select.setString(1, service)
-            select.execute()
+//        use { connection ->
+//            val select =
+//                connection.prepareStatement("SELECT song_id, hits FROM popular WHERE service=? ORDER BY hits DESC LIMIT $count;")
+//            select.setString(1, service)
+//            select.execute()
+//
+//            val results = select.resultSet
+//            val popular: MutableList<String> = ArrayList()
+//
+//            while (results.next()) {
+//                popular.add(results.getString("song_id"))
+//            }
+//
+//            return@use popular
+//        }.mapNotNull { songID -> getInfo(songID, clientInfo) }
 
-            val results = select.resultSet
-            val popular: MutableList<String> = ArrayList()
-
-            while (results.next()) {
-                popular.add(results.getString("song_id"))
-            }
-
-            return@use popular
-        }.mapNotNull { songID -> getInfo(songID, clientInfo) }
-
-//        return popularLocks[service]?.read {
-//            popularSongs[service]?.take(count)
-//        }?.mapNotNull { songID ->
-//            getInfo(songID, null)
-//        } ?: emptyList()
+        return popularLocks[service]?.read {
+            popularSongs[service]?.take(count)
+        }?.mapNotNull { songID ->
+            getInfo(songID, null)
+        } ?: emptyList()
     }
 
     private suspend fun getInfo(songID: String, clientInfo: ClientInfo?): JukeboxInfo? {
