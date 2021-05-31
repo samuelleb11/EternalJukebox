@@ -534,7 +534,7 @@ abstract class HikariDatabase : IDatabase {
                         updatePopular(connection, updates)
 
                         val select =
-                            connection.prepareStatement("SELECT song_id, hits FROM popular WHERE service=? ORDER BY hits DESC LIMIT 100;")
+                            connection.prepareStatement("SELECT song_id, hits FROM popular WHERE service=\"jukebox\" ORDER BY hits DESC LIMIT 100;")
 
                         popularSongs.keys.forEach { service ->
                             select.setString(1, service)
