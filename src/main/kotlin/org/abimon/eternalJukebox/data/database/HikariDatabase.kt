@@ -443,8 +443,8 @@ abstract class HikariDatabase : IDatabase {
             insertUpdate.clearBatch()
 
             chunk.forEach { (key, amount) ->
-                insertUpdate.setString(1, key.substringBefore(':'))
-                insertUpdate.setString(2, key.substringAfter(':'))
+                insertUpdate.setString(2, key.substringBefore(':'))
+                insertUpdate.setString(1, key.substringAfter(':'))
                 insertUpdate.setInt(3, amount)
                 insertUpdate.setInt(4, amount)
                 insertUpdate.addBatch()
