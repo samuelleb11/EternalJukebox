@@ -3,7 +3,7 @@ FROM docker-hub-cache.whnet.ca/library/adoptopenjdk:8-jdk-hotspot as deps
 
 WORKDIR /EternalJukebox
 
-RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/download/2021.10.10/yt-dlp -o /usr/local/bin/youtube-dl \
+RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/download/latest/yt-dlp -o /usr/local/bin/youtube-dl \
     && chmod a+rx /usr/local/bin/youtube-dl\
     && apt-get update \
     && apt-get install ffmpeg gettext python python3 -y \
@@ -49,4 +49,4 @@ COPY --from=gradle-build /home/gradle/project/EternalJukebox/build/libs/* ./
 # envsubst is used so environment variables can be used instead of a config file
 
 CMD envsubst < "/EternalJukebox/envvar_config.yaml" > "/EternalJukebox/config.yaml"\
-    && java -jar EternalJukebox.jar
+    && java -jar EternalJukebox-all.jar
