@@ -3,7 +3,7 @@ FROM docker-hub-cache.whnet.ca/library/adoptopenjdk:8-jdk-hotspot as deps
 
 WORKDIR /EternalJukebox
 
-RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/download/latest/yt-dlp -o /usr/local/bin/youtube-dl \
+RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/download/2023.10.13/yt-dlp -o /usr/local/bin/youtube-dl \
     && chmod a+rx /usr/local/bin/youtube-dl\
     && apt-get update \
     && apt-get install ffmpeg gettext python python3 -y \
