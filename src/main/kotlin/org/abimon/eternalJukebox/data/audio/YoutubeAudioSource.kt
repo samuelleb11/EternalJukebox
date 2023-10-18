@@ -82,13 +82,18 @@ object YoutubeAudioSource : IAudioSource {
             clientInfo?.userUID, closest.snippet.title, closest.id
         )
 
-        val tmpFile = File("$uuid.tmp")
+        val tmpFile = File("$uuid.$format")
         val tmpLog = File("${info.id}-$uuid.log")
         val ffmpegLog = File("${info.id}-$uuid.log")
         val endGoalTmp = File(tmpFile.absolutePath.replace(".tmp", ".$format"))
 
         try {
             withContext(Dispatchers.IO) {
+                logger.warn(
+                    "tmp: {} || endGoalTmp: {}",
+                    tmpFile,
+                    endGoalTmp
+                )
                 val downloadProcess = ProcessBuilder().command(ArrayList(command).apply {
                     add("https://youtu.be/${closest.id}")
                     add(tmpFile.absolutePath)
