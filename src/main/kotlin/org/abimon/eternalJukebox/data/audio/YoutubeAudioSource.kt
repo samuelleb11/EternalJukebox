@@ -82,7 +82,7 @@ object YoutubeAudioSource : IAudioSource {
             clientInfo?.userUID, closest.snippet.title, closest.id
         )
 
-        val tmpFile = File("$uuid.tmp")
+        val tmpFile = File("$uuid.tmp.m4a")
         val tmpLog = File("${info.id}-$uuid.log")
         val ffmpegLog = File("${info.id}-$uuid.log")
         val endGoalTmp = File(tmpFile.absolutePath.replace(".tmp", ".$format"))

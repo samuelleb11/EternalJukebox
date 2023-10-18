@@ -249,7 +249,7 @@ object AudioAPI : IAPI {
                                     b64
                                 )
 
-                            val tmpFile = File("$uuid.tmp")
+                            val tmpFile = File("$uuid.tmp.m4a")
                             val tmpLog = File("$b64-$uuid.log")
                             val ffmpegLog = File("$b64-$uuid.log")
                             val endGoalTmp = File(tmpFile.absolutePath.replace(".tmp", ".$format"))
