@@ -85,7 +85,7 @@ object YoutubeAudioSource : IAudioSource {
         val tmpFile = File("$uuid.tmp.m4a")
         val tmpLog = File("${info.id}-$uuid.log")
         val ffmpegLog = File("${info.id}-$uuid.log")
-        val endGoalTmp = File(tmpFile.absolutePath.replace(".tmp", ".$format"))
+        val endGoalTmp = File(tmpFile.absolutePath.replace(".tmp.m4a", ".$format"))
 
         try {
             withContext(Dispatchers.IO) {
