@@ -1,5 +1,5 @@
 # set up the main image with dependencies first, to avoid re-doing this after each build
-FROM docker-hub-cache.whnet.ca/library/adoptopenjdk:8-jdk-hotspot as deps
+FROM harbor.whnet.ca/dockerhub/library/adoptopenjdk:8-jdk-hotspot as deps
 
 WORKDIR /EternalJukebox
 
